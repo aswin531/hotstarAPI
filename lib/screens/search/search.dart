@@ -27,7 +27,7 @@ class SearchScreen extends StatelessWidget {
                 height: 20,
               ),
               SearchScreenBody(),
-              SearchStaggeredScreen()
+              // SearchStaggeredScreen()
             ],
           ),
         ),

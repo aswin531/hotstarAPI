@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotstar/screens/search/search.dart';
+import 'package:hotstar/screens/home/bottomnavbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SearchScreen(),
+      home: const BottomNavBarScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

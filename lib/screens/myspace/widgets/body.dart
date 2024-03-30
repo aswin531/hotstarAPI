@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hotstar/screens/myspace/widgets/button.dart';
 import 'package:hotstar/utils/colors.dart';
 import 'package:hotstar/utils/icons.dart';

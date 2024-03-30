@@ -6,7 +6,10 @@ Color black = Colors.black;
 Color transparent = Colors.transparent;
 Color color1 = const Color(0xFF007bff);
 Color color2 = const Color.fromARGB(255, 13, 27, 71);
-Color color3 = const Color(0xFFffc107);
+Color color3 = const Color.fromARGB(255, 255, 193, 7);
+Color addColor = Colors.blue;
+Color addgrey = const Color.fromARGB(255, 68, 68, 68);
+Color transparentGold = const Color.fromRGBO(255, 215, 0, 0.5);
 Color white = Colors.white;
 Color lwhite = Colors.white.withOpacity(0.8);
 Color grey = Colors.grey;
@@ -24,6 +27,7 @@ LinearGradient customGradient = LinearGradient(
     black,
   ],
 );
+
 final myGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
@@ -34,6 +38,7 @@ final myGradient = LinearGradient(
     color2,
   ],
 );
+
 Color gethelp = const Color.fromARGB(255, 37, 118, 239);
 const List<Color> blues = [
   Color.fromARGB(255, 12, 70, 132),
@@ -41,6 +46,7 @@ const List<Color> blues = [
   Color.fromARGB(255, 3, 29, 85),
   Color.fromARGB(6, 44, 155, 255),
 ];
+
 const blueGradient = LinearGradient(
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
