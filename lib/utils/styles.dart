@@ -21,6 +21,18 @@ class MyTextStyles {
     fontWeight: FontWeight.w700,
     color: lightwhite,
   );
+  static TextStyle detailedOptions = TextStyle(
+    fontFamily: GoogleFonts.abel().fontFamily,
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    color: grey,
+  );
+  static TextStyle detailedStyle = GoogleFonts.getFont(
+    'Roboto',
+    fontSize: 15,
+    fontWeight: FontWeight.w700,
+    color: black,
+  );
   static TextStyle catDefault = GoogleFonts.getFont(
     'Roboto',
     fontSize: 12,
@@ -35,11 +47,10 @@ class MyTextStyles {
     color: addColor,
     fontWeight: FontWeight.bold,
   );
-   static TextStyle addbutStyleTwo = TextStyle(
+  static TextStyle addbutStyleTwo = TextStyle(
     color: white,
     fontWeight: FontWeight.bold,
   );
-
 
   static TextStyle subheadingStyle = TextStyle(fontSize: 12, color: grey);
   static TextStyle loginStyle = TextStyle(fontSize: 12, color: gethelp);

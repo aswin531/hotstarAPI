@@ -2,28 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hotstar/utils/colors.dart';
 import 'package:hotstar/utils/styles.dart';
 
-class ButtonClass extends StatelessWidget {
-  final String buttonText;
-  final String buttonText2;
-  final Color buttonColor;
-  final Color textColor;
-  final Color? additionalColor;
-  const ButtonClass(
-      {super.key,
-      required this.buttonText,
-      required this.buttonText2,
-      required this.buttonColor,
-      required this.textColor,
-      this.additionalColor});
+class DetailedButton extends StatelessWidget {
+  const DetailedButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.5,
+      width: MediaQuery.of(context).size.width * 1,
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
-          backgroundColor: buttonColor,
+          backgroundColor: white,
           padding: const EdgeInsets.symmetric(
             vertical: 8,
           ),
@@ -36,15 +25,12 @@ class ButtonClass extends StatelessWidget {
           children: [
             Icon(
               Icons.play_arrow,
-              color: white,
+              color: black,
             ),
             Text(
-              buttonText,
-              textAlign: TextAlign.center,
-              style: MyTextStyles.addbutStyleTwo,
+              "Subscribe to Watch",
+              style: MyTextStyles.detailedStyle,
             ),
-            Text(buttonText2,
-                textAlign: TextAlign.center, style: MyTextStyles.addbutStyle),
           ],
         ),
       ),

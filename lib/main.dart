@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotstar/screens/home/bottomnavbar.dart';
+import 'package:hotstar/splashscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const BottomNavBarScreen(),
+      home:const SplashScreen(videoAsset:'assets/videos/splashtest.mp4',),
       debugShowCheckedModeBanner: false,
     );
   }

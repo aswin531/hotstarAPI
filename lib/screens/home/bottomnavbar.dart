@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hotstar/new&hot/newandhot.dart';
+import 'package:hotstar/screens/new&hot/newandhot.dart';
 import 'package:hotstar/screens/downloads/downloads.dart';
 import 'package:hotstar/screens/home/homeappbar.dart';
 import 'package:hotstar/screens/myspace/myspace.dart';
@@ -23,10 +23,14 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
     DownloadsScreen(),
     MySpaceScreen()
   ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      
-      body: screens[currentIndex],
+    return Scaffold(
+      body: IndexedStack(
+        index: currentIndex,
+        children: screens,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
         backgroundColor: lightblack,

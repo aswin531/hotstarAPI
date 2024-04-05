@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotstar/screens/home/widgets/button.dart';
+import 'package:hotstar/screens/details/detailedscreen.dart';
 import 'package:hotstar/screens/home/widgets/content.dart';
 import 'package:hotstar/utils/colors.dart';
 
@@ -13,24 +13,25 @@ class HomeContentScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            ButtonClass(
-              buttonColor: addgrey,
-              buttonText: "Watch ",
-              buttonText2: " Free",
-              additionalColor: addColor,
-              textColor: white,
-            ),
+            
             ContentSection(
               title: "Best in Sports",
               itemHeight: MediaQuery.of(context).size.height * 0.15,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.47,
-                      color: color3,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const DetailedScreen(),
+                      ));
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.47,
+                        color: color3,
+                      ),
                     ),
                   ),
                 );
@@ -42,11 +43,18 @@ class HomeContentScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.31,
-                      color: color3,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const DetailedScreen(),
+                      ));
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.31,
+                        color: color3,
+                      ),
                     ),
                   ),
                 );
@@ -58,11 +66,18 @@ class HomeContentScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.31,
-                      color: color3,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const DetailedScreen(),
+                      ));
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.31,
+                        color: color3,
+                      ),
                     ),
                   ),
                 );
@@ -74,11 +89,41 @@ class HomeContentScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.47,
-                      color: color3,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const DetailedScreen(),
+                      ));
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.47,
+                        color: color3,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            ContentSection(
+              title: "Popular Shows",
+              itemHeight: MediaQuery.of(context).size.height * 0.22,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const DetailedScreen(),
+                      ));
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.31,
+                        color: color3,
+                      ),
                     ),
                   ),
                 );
