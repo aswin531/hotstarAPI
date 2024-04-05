@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hotstar/api/apiconstants.dart';
+import 'package:hotstar/models/movies.dart';
 import 'package:hotstar/screens/details/button.dart';
 import 'package:hotstar/screens/details/widgets/richtext.dart';
 import 'package:hotstar/screens/details/widgets/texticon.dart';
@@ -10,17 +10,15 @@ import 'package:hotstar/utils/colors.dart';
 import 'package:hotstar/utils/styles.dart';
 
 class DetailedMovieScreen extends StatefulWidget {
-  const DetailedMovieScreen({super.key});
+  final Movie movie;
+
+  const DetailedMovieScreen({super.key, required this.movie});
 
   @override
   State<DetailedMovieScreen> createState() => _DetailedMovieScreenState();
 }
 
 class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
-  List moreLikeShows = [];
-  String apiKey = ApiDetails.apiKey;
-  final token = ApiDetails().readAccessToken;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +35,7 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                     width: double.infinity,
                     color: primary,
                     child: CachedNetworkImage(
-                      imageUrl: "",
+                      imageUrl: widget.movie.backDropPath ?? "",
                     ),
                   );
                 },

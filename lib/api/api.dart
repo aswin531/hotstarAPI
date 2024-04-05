@@ -17,7 +17,7 @@ class Api {
       "https://api.themoviedb.org/3/tv/top_rated?api_key=${ApiDetails.apiKey}";
 
   Future<List<Movie>> getUpComingMovies() async {
-    final response = await http.get(upComingApiUrl as Uri);
+    final response = await http.get(Uri.parse(upComingApiUrl));
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
       List<Movie> movies = data.map((movie) => Movie.fromMap(movie)).toList();
