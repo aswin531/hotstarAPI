@@ -1,18 +1,18 @@
-class TvShows {
+class LatestMovies {
   String? title;
   String? backDropPath;
   String? overView;
   String? posterPath;
 
-  TvShows({
+  LatestMovies({
     required this.title,
     required this.backDropPath,
     required this.overView,
     required this.posterPath,
   });
 
-  factory TvShows.fromMap(Map<String, dynamic> map) {
-    return TvShows(
+  factory LatestMovies.fromMap(Map<String, dynamic> map) {
+    return LatestMovies(
       title: map['title'],
       backDropPath: map['backdrop_path'],
       overView: map['overview'],

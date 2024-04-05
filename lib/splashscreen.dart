@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hotstar/screens/home/bottomnavbar.dart';
-import 'package:hotstar/utils/colors.dart';
 import 'package:video_player/video_player.dart';
 
 class SplashScreen extends StatefulWidget {

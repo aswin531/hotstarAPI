@@ -1,17 +1,21 @@
 import 'dart:convert';
 
+import 'package:hotstar/api/apiconstants.dart';
+import 'package:hotstar/api/exceptions.dart';
 import 'package:hotstar/models/movies.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
+  // final apiDetails = ApiDetails();
+
   final upComingApiUrl =
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=f090e64e76bd9335bbb96eefcaf2d64a";
+      "https://api.themoviedb.org/3/movie/upcoming?api_key=${ApiDetails.apiKey}";
   final popularApiUrl =
-      "https://api.themoviedb.org/3/movie/popular?api_key=f090e64e76bd9335bbb96eefcaf2d64a";
+      "https://api.themoviedb.org/3/movie/popular?api_key=${ApiDetails.apiKey}";
   final topRatedApiUrl =
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=f090e64e76bd9335bbb96eefcaf2d64a";
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=${ApiDetails.apiKey}";
   final topTvRatedApiUrl =
-      "https://api.themoviedb.org/3/tv/top_rated?api_key=f090e64e76bd9335bbb96eefcaf2d64a";
+      "https://api.themoviedb.org/3/tv/top_rated?api_key=${ApiDetails.apiKey}";
 
   Future<List<Movie>> getUpComingMovies() async {
     final response = await http.get(upComingApiUrl as Uri);
@@ -25,13 +29,43 @@ class Api {
   }
 
   Future<List<Movie>> getPopularMovies() async {
-    final response = await http.get(Uri.parse(popularApiUrl));
-    if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body)['results'];
-      List<Movie> movies = data.map((movie) => Movie.fromMap(movie)).toList();
-      return movies;
-    } else {
-      throw Exception("Failed to load Upcoming Movies");
+    try {
+      final response = await http.get(Uri.parse(popularApiUrl));
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = json.decode(response.body)['results'];
+        List<Movie> movies = data.map((movie) => Movie.fromMap(movie)).toList();
+        return movies;
+      } else {
+        String errorMessage = '';
+        if (response.body.isNotEmpty) {
+          errorMessage = json.decode(response.body)['status_message'];
+        }
+
+        switch (response.statusCode) {
+          case 400:
+            throw BadRequestException(
+                errorMessage.isNotEmpty ? errorMessage : "Bad request");
+          case 401:
+            throw UnauthorizedException(
+                errorMessage.isNotEmpty ? errorMessage : "Unauthorized");
+          case 403:
+            throw ForbiddenException(
+                errorMessage.isNotEmpty ? errorMessage : "Forbidden");
+          case 404:
+            throw NotFoundException(
+                errorMessage.isNotEmpty ? errorMessage : "Not found");
+          case 500:
+            throw InternalServerErrorException(errorMessage.isNotEmpty
+                ? errorMessage
+                : "Internal server error");
+          default:
+            throw Exception(
+                "Failed to load Popular Movies. Status code: ${response.statusCode}");
+        }
+      }
+    } catch (e) {
+      throw Exception("Failed to load Popular Movies: $e");
     }
   }
 

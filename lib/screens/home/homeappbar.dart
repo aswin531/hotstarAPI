@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
       backgroundColor: lightblack,
       body: Stack(
         children: [
@@ -56,13 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
-              ButtonClass(
-                buttonColor: addgrey,
-                buttonText: "Watch ",
-                buttonText2: " Free",
-                additionalColor: addColor,
-                textColor: white,
-              ),
+              // ButtonClass(
+              //   buttonColor: addgrey,
+              //   buttonText: "Watch ",
+              //   buttonText2: " Free",
+              //   additionalColor: addColor,
+              //   textColor: white,
+              // ),
               const Expanded(child: HomeContentScreen()),
             ],
           ),
@@ -75,46 +75,44 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: Colors.transparent,
               leading: Image.asset(pIconBg),
               actions: [
-                Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.135,
-                        height: MediaQuery.of(context).size.height * 0.018,
-                        decoration: BoxDecoration(
-                          color: transparent,
-                          borderRadius: BorderRadius.circular(3),
-                          border: Border.all(width: 1, color: transparentGold),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: Text(
-                            "SUBSCRIBE",
-                            textAlign: TextAlign.center,
-                            style: MyTextStyles.subtextStyle,
-                          ),
+                Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.135,
+                      height: MediaQuery.of(context).size.height * 0.018,
+                      decoration: BoxDecoration(
+                        color: transparent,
+                        borderRadius: BorderRadius.circular(3),
+                        border: Border.all(width: 1, color: transparentGold),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text(
+                          "SUBSCRIBE",
+                          textAlign: TextAlign.center,
+                          style: MyTextStyles.subtextStyle,
                         ),
                       ),
-                      const SizedBox(width: 20),
-                      const Icon(Icons.cast, color: Colors.white),
-                      const SizedBox(width: 15),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(width: 20),
+                    const Icon(Icons.cast, color: Colors.white),
+                    const SizedBox(width: 15),
+                  ],
                 )
               ],
             ),
           ),
-          // Positioned(
-          //   top: 150,
-          //   child: ButtonClass(
-          //     buttonColor: addgrey,
-          //     buttonText: "Watch ",
-          //     buttonText2: " Free",
-          //     additionalColor: addColor,
-          //     textColor: white,
-          //   ),
-          // )
+          Positioned(
+            top: 391,
+            left: 130,
+            child: ButtonClass(
+              buttonColor: Colors.transparent.withOpacity(0.5), //addgrey,
+              buttonText: "Watch ",
+              buttonText2: " Free",
+              additionalColor: addColor,
+              textColor: white,
+            ),
+          )
         ],
       ),
     );

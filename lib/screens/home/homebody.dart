@@ -6,6 +6,35 @@ import 'package:hotstar/utils/colors.dart';
 class HomeContentScreen extends StatelessWidget {
   const HomeContentScreen({super.key});
 
+  void _navigateToDetailedScreen(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const DetailedScreen(),
+    ));
+  }
+
+  Widget _buildContentSection(
+      BuildContext context, String title, double itemHeight, double itemWidth) {
+    return ContentSection(
+      title: title,
+      itemHeight: itemHeight,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: GestureDetector(
+            onTap: () => _navigateToDetailedScreen(context),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.47,
+                color: color3,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -13,122 +42,31 @@ class HomeContentScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            
-            ContentSection(
-              title: "Best in Sports",
-              itemHeight: MediaQuery.of(context).size.height * 0.15,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const DetailedScreen(),
-                      ));
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.47,
-                        color: color3,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            ContentSection(
-              title: "Latest Releases",
-              itemHeight: MediaQuery.of(context).size.height * 0.22,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const DetailedScreen(),
-                      ));
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.31,
-                        color: color3,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            ContentSection(
-              title: "Asianet Shows",
-              itemHeight: MediaQuery.of(context).size.height * 0.22,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const DetailedScreen(),
-                      ));
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.31,
-                        color: color3,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            ContentSection(
-              title: "Hotstar Specials",
-              itemHeight: MediaQuery.of(context).size.height * 0.32,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const DetailedScreen(),
-                      ));
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.47,
-                        color: color3,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            ContentSection(
-              title: "Popular Shows",
-              itemHeight: MediaQuery.of(context).size.height * 0.22,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const DetailedScreen(),
-                      ));
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.31,
-                        color: color3,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
+            _buildContentSection(
+                context,
+                "Best in Sports",
+                MediaQuery.of(context).size.height * 0.15,
+                MediaQuery.of(context).size.width * 0.47),
+            _buildContentSection(
+                context,
+                "Latest Releases",
+                MediaQuery.of(context).size.height * 0.22,
+                MediaQuery.of(context).size.width * 0.31),
+            _buildContentSection(
+                context,
+                "Asianet Shows",
+                MediaQuery.of(context).size.height * 0.22,
+                MediaQuery.of(context).size.width * 0.31),
+            _buildContentSection(
+                context,
+                "Hotstar Specials",
+                MediaQuery.of(context).size.height * 0.32,
+                MediaQuery.of(context).size.width * 0.47),
+            _buildContentSection(
+                context,
+                "Popular Shows",
+                MediaQuery.of(context).size.height * 0.22,
+                MediaQuery.of(context).size.width * 0.31),
           ],
         ),
       ),

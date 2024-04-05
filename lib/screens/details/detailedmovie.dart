@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,7 +18,7 @@ class DetailedMovieScreen extends StatefulWidget {
 
 class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
   List moreLikeShows = [];
-  String apiKey = ApiDetails().apiKey;
+  String apiKey = ApiDetails.apiKey;
   final token = ApiDetails().readAccessToken;
 
   @override
@@ -33,26 +34,30 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                 itemBuilder: (context, itemIndex, pageViewIndex) {
                   return Container(
                     height: MediaQuery.of(context).size.height * 0.5,
-                    width: MediaQuery.of(context).size.width * 0.78,
+                    width: double.infinity,
                     color: primary,
+                    child: CachedNetworkImage(
+                      imageUrl: "",
+                    ),
                   );
                 },
                 options: CarouselOptions(
                   aspectRatio: 16 / 10,
-                  autoPlay: true,
-                  viewportFraction: 0.6,
+                  autoPlay: false,
+                  viewportFraction: 1,
                   autoPlayAnimationDuration: const Duration(seconds: 3),
                 ),
               ),
               Positioned(
-                top: 16,
-                right: 16,
+                top: 10,
+                right: 10,
                 child: GestureDetector(
                   onTap: () {},
-                  child: const Icon(
-                    Icons.close,
+                  child: IconButton(
+                    onPressed: () {},
                     color: Colors.white,
-                    size: 24,
+                    iconSize: 26,
+                    icon: const Icon(Icons.close),
                   ),
                 ),
               ),

@@ -26,14 +26,14 @@ class HomeScreenBody extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  // onTap: () => _onMovieTap(context, movie),
-                ),
+                    // onTap: () => _onMovieTap(context, movie),
+                    ),
               ),
             ),
           ]);
         },
         options: CarouselOptions(
-            aspectRatio: 16 / 16,
+            aspectRatio: 15.5 / 13,
             autoPlay: true,
             viewportFraction: 1.5,
             autoPlayAnimationDuration: const Duration(seconds: 3),
