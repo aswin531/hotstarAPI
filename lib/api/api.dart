@@ -1,5 +1,5 @@
+// ignore_for_file: avoid_print
 import 'dart:convert';
-
 import 'package:hotstar/api/apiconstants.dart';
 import 'package:hotstar/api/exceptions.dart';
 import 'package:hotstar/models/movies.dart';
@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 
 class Api {
   // final apiDetails = ApiDetails();
-
   final upComingApiUrl =
       "https://api.themoviedb.org/3/movie/upcoming?api_key=${ApiDetails.apiKey}";
   final popularApiUrl =
@@ -64,8 +63,13 @@ class Api {
                 "Failed to load Popular Movies. Status code: ${response.statusCode}");
         }
       }
-    } catch (e) {
-      throw Exception("Failed to load Popular Movies: $e");
+    }  catch (e) {
+      print('Exception occurred: $e');
+      // ScaffoldMessenger.of().showSnackBar(SnackBar(
+      //   content: Text('Error: $e'),
+      // ));
+      // Rethrow the exception to propagate it further
+      rethrow;
     }
   }
 

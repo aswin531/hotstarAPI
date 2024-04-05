@@ -25,7 +25,8 @@ class HomeContentScreen extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Container(
-                width: MediaQuery.of(context).size.width * 0.47,
+                width: itemWidth,
+                height: itemHeight,
                 color: color3,
               ),
             ),
@@ -39,34 +40,34 @@ class HomeContentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             _buildContentSection(
                 context,
                 "Best in Sports",
                 MediaQuery.of(context).size.height * 0.15,
-                MediaQuery.of(context).size.width * 0.47),
+                MediaQuery.of(context).size.width * 0.45),
             _buildContentSection(
                 context,
                 "Latest Releases",
                 MediaQuery.of(context).size.height * 0.22,
-                MediaQuery.of(context).size.width * 0.31),
+                MediaQuery.of(context).size.width * 0.297),
             _buildContentSection(
                 context,
                 "Asianet Shows",
                 MediaQuery.of(context).size.height * 0.22,
-                MediaQuery.of(context).size.width * 0.31),
+                MediaQuery.of(context).size.width * 0.297),
             _buildContentSection(
                 context,
                 "Hotstar Specials",
                 MediaQuery.of(context).size.height * 0.32,
-                MediaQuery.of(context).size.width * 0.47),
+                MediaQuery.of(context).size.width * 0.45),
             _buildContentSection(
                 context,
                 "Popular Shows",
                 MediaQuery.of(context).size.height * 0.22,
-                MediaQuery.of(context).size.width * 0.31),
+                MediaQuery.of(context).size.width * 0.297),
           ],
         ),
       ),

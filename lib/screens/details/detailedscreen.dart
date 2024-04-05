@@ -15,7 +15,7 @@ class DetailedScreen extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: lightblack,
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             DetailedMovieScreen(),

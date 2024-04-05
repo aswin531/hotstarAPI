@@ -54,7 +54,9 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                 child: GestureDetector(
                   onTap: () {},
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                     color: Colors.white,
                     iconSize: 26,
                     icon: const Icon(Icons.close),
