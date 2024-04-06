@@ -6,48 +6,30 @@ import 'package:hotstar/models/movies.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  // final apiDetails = ApiDetails();
-  final upComingApiUrl =
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=${ApiDetails.apiKey}";
-  final popularApiUrl =
-      "https://api.themoviedb.org/3/movie/popular?api_key=${ApiDetails.apiKey}";
-  final topRatedApiUrl =
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=${ApiDetails.apiKey}";
-  final topTvRatedApiUrl =
-      "https://api.themoviedb.org/3/tv/top_rated?api_key=${ApiDetails.apiKey}";
+  final String _baseUrl = "https://api.themoviedb.org/3/";
 
-  Future<List<Movie>> getUpComingMovies() async {
-    final response = await http.get(Uri.parse(upComingApiUrl));
-    if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body)['results'];
-      List<Movie> movies = data.map((movie) => Movie.fromMap(movie)).toList();
-      return movies;
-    } else {
-      throw Exception("Failed to load Upcoming Movies");
-    }
-  }
-
-  Future<List<Movie>> getPopularMovies() async {
+  Future<List<Movie>> _fetchMovies(String endpoint) async {
+    const String apiKey = ApiDetails.apiKey;
+    final url = Uri.parse("$_baseUrl$endpoint?api_key=$apiKey");
     try {
-      final response = await http.get(Uri.parse(popularApiUrl));
-
+      final response = await http.get(url);
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body)['results'];
-        List<Movie> movies = data.map((movie) => Movie.fromMap(movie)).toList();
+        List<Movie> movies =
+            data.map((movie) => Movie.fromMap(movie, 'latest')).toList();
         return movies;
       } else {
         String errorMessage = '';
         if (response.body.isNotEmpty) {
           errorMessage = json.decode(response.body)['status_message'];
         }
-
         switch (response.statusCode) {
           case 400:
             throw BadRequestException(
                 errorMessage.isNotEmpty ? errorMessage : "Bad request");
           case 401:
             throw UnauthorizedException(
-                errorMessage.isNotEmpty ? errorMessage : "Unauthorized");
+                errorMessage.isNotEmpty ? errorMessage : "Unauthorised");
           case 403:
             throw ForbiddenException(
                 errorMessage.isNotEmpty ? errorMessage : "Forbidden");
@@ -60,38 +42,34 @@ class Api {
                 : "Internal server error");
           default:
             throw Exception(
-                "Failed to load Popular Movies. Status code: ${response.statusCode}");
+                "Failed to load movies. Status code: ${response.statusCode}");
         }
       }
-    }  catch (e) {
-      print('Exception occurred: $e');
-      // ScaffoldMessenger.of().showSnackBar(SnackBar(
-      //   content: Text('Error: $e'),
-      // ));
-      // Rethrow the exception to propagate it further
+    } catch (e) {
+      print("Excption occurred : $e");
       rethrow;
     }
   }
 
-  Future<List<Movie>> gettopRatedMovies() async {
-    final response = await http.get(Uri.parse(topRatedApiUrl));
-    if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body)['results'];
-      List<Movie> movies = data.map((movie) => Movie.fromMap(movie)).toList();
-      return movies;
-    } else {
-      throw Exception("Failed to load Upcoming Movies");
-    }
+  Future<List<Movie>> getPopularMovies() async {
+    return _fetchMovies("tv/popular");
   }
 
-  Future<List<Movie>> gettopTvRatedMovies() async {
-    final response = await http.get(Uri.parse(topTvRatedApiUrl));
-    if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body)['results'];
-      List<Movie> movies = data.map((movie) => Movie.fromMap(movie)).toList();
-      return movies;
-    } else {
-      throw Exception("Failed to load Upcoming Movies");
-    }
+  Future<List<Movie>> getUpcomingMovies() async {
+    return _fetchMovies("tv/on_the_air");
   }
+
+  Future<List<Movie>> getTopRatedMovies() async {
+    return _fetchMovies("movie/top_rated");
+  }
+
+  Future<List<Movie>> getTopRatedTvShows() async {
+    return _fetchMovies("tv/top_rated");
+  }
+
+  Future<List<Movie>> getnowPLaying() {
+    return _fetchMovies("movie/now_playing");
+  }
+
+  gettopTvRatedMovies() {}
 }

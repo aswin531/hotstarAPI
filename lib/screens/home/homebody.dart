@@ -18,9 +18,10 @@ class HomeContentScreen extends StatefulWidget {
 class _HomeContentScreenState extends State<HomeContentScreen> {
   late Future<List<Movie>> popularMovies;
   late Future<List<Movie>> upcomingMovies;
-  // late Future<List<Movie>> asianetTvRatedMovies;
   late Future<List<Movie>> topRatedMovies;
   late Future<List<Movie>> topTvRatedMovies;
+  late Future<List<Movie>> tvOnAir;
+
   @override
   void initState() {
     super.initState();
@@ -29,16 +30,16 @@ class _HomeContentScreenState extends State<HomeContentScreen> {
 
   Future<void> loadMovies() async {
     popularMovies = Api().getPopularMovies();
-    upcomingMovies = Api().getUpComingMovies();
-    topRatedMovies = Api().gettopRatedMovies();
+    upcomingMovies = Api().getUpcomingMovies();
+    topRatedMovies = Api().getTopRatedMovies();
     topTvRatedMovies = Api().gettopTvRatedMovies();
   }
 
-void _navigateToDetailedScreen(BuildContext context, Movie movie) {
-  Navigator.of(context).push(MaterialPageRoute(
-    builder: (context) => DetailedScreen(movie: movie),
-  ));
-}
+  void _navigateToDetailedScreen(BuildContext context, Movie movie) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => DetailedScreen(movie: movie),
+    ));
+  }
 
   Widget _buildContentSection(
     BuildContext context,
@@ -53,9 +54,9 @@ void _navigateToDetailedScreen(BuildContext context, Movie movie) {
       itemBuilder: (context, index) {
         final Movie movie = movies[index];
         return Padding(
-          padding: const EdgeInsets.all(2.0),
+          padding: const EdgeInsets.all(4.0),
           child: GestureDetector(
-            onTap: () => _navigateToDetailedScreen(context,movie),
+            onTap: () => _navigateToDetailedScreen(context, movie),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Container(
@@ -64,7 +65,7 @@ void _navigateToDetailedScreen(BuildContext context, Movie movie) {
                 color: color3,
                 child: CachedNetworkImage(
                   imageUrl:
-                      "https://image.tmdb.org/t/p/original/${movie.backDropPath}",
+                      "https://image.tmdb.org/t/p/original/${movie.backdropPath}",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -122,7 +123,7 @@ void _navigateToDetailedScreen(BuildContext context, Movie movie) {
 
           return SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(5.0),
               child: Column(
                 children: [
                   if (popularMovies.isNotEmpty)
@@ -137,15 +138,15 @@ void _navigateToDetailedScreen(BuildContext context, Movie movie) {
                     _buildContentSection(
                       context,
                       "Latest Releases",
-                      upcomingMovies,
+                      topTvRatedMovies,
                       upcomingMoviesItemHeight,
                       upcomingMoviesItemWidth,
                     ),
                   if (upcomingMovies.isNotEmpty)
                     _buildContentSection(
                       context,
-                      "Asianet Shows",
-                      topTvRatedMovies,
+                      "Animated Shows",
+                      topRatedMovies,
                       extraMoviesItemHeight,
                       extraMoviesItemWidth,
                     ),
@@ -154,7 +155,7 @@ void _navigateToDetailedScreen(BuildContext context, Movie movie) {
                       _buildContentSection(
                         context,
                         "Hotstar Specials",
-                        topRatedMovies,
+                        topTvRatedMovies,
                         topRatedMoviesItemHeight,
                         topRatedMoviesItemWidth,
                       ),
@@ -162,7 +163,7 @@ void _navigateToDetailedScreen(BuildContext context, Movie movie) {
                     _buildContentSection(
                       context,
                       "Popular Shows",
-                      topTvRatedMovies,
+                      topRatedMovies,
                       topTvRatedMoviesItemHeight,
                       topTvRatedMoviesItemWidth,
                     ),
@@ -182,16 +183,16 @@ void _navigateToDetailedScreen(BuildContext context, Movie movie) {
 
   Future<List<Movie>> loadUpcomingMovies() async {
     final api = Api();
-    return await api.getUpComingMovies();
+    return await api.getUpcomingMovies();
   }
 
   Future<List<Movie>> loadTopRatedMovies() async {
     final api = Api();
-    return await api.gettopRatedMovies();
+    return await api.getTopRatedMovies();
   }
 
   Future<List<Movie>> loadTopTvRatedMovies() async {
     final api = Api();
-    return await api.gettopTvRatedMovies();
+    return await api.getnowPLaying();
   }
 }

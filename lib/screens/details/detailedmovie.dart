@@ -35,7 +35,7 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                     width: double.infinity,
                     color: primary,
                     child: CachedNetworkImage(
-                      imageUrl: widget.movie.backDropPath ?? "",
+                      imageUrl: widget.movie.backdropPath ?? "",
                     ),
                   );
                 },

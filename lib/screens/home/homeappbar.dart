@@ -16,10 +16,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<Movie>> popularMovies;
-  late Future<List<Movie>> upcomingMovies;
-  late Future<List<Movie>> topratedMovies;
-  late Future<List<Movie>> toptvratedmovies;
+  late Future<List<Movie>> popularMovies = fetchpopularMovies();
+  late Future<List<Movie>> upcomingMovies = fetchupcomingMovies();
+  late Future<List<Movie>> topratedMovies = fetchtopratedMovies();
+  late Future<List<Movie>> toptvratedmovies = fetchtoptvratedmovies();
+  late Future<List<Movie>> nowPlayingMovies = fetchNowPlayingMovies();
   @override
   void initState() {
     super.initState();
@@ -28,9 +29,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> loadMovies() async {
     popularMovies = Api().getPopularMovies();
-    upcomingMovies = Api().getUpComingMovies();
-    topratedMovies = Api().gettopRatedMovies();
+    upcomingMovies = Api().getUpcomingMovies();
+    topratedMovies = Api().getTopRatedMovies();
     toptvratedmovies = Api().gettopTvRatedMovies();
+    nowPlayingMovies = Api().getnowPLaying();
+  }
+
+  static Future<List<Movie>> fetchNowPlayingMovies() async {
+    return Api().getnowPLaying();
+  }
+
+  static Future<List<Movie>> fetchupcomingMovies() async {
+    return Api().getUpcomingMovies();
+  }
+
+  static Future<List<Movie>> fetchtopratedMovies() async {
+    return Api().getTopRatedMovies();
+  }
+
+  static Future<List<Movie>> fetchtoptvratedmovies() async {
+    return Api().gettopTvRatedMovies();
+  }
+
+  static Future<List<Movie>> fetchpopularMovies() async {
+    return Api().getPopularMovies();
   }
 
   @override
@@ -44,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Expanded(
                 child: FutureBuilder<List<Movie>>(
-                  future: popularMovies,
+                  future: topratedMovies,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return HomeScreenBody(movies: snapshot.data!);
@@ -102,6 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
+          Text('p'),
           Positioned(
             top: 391,
             left: 130,
