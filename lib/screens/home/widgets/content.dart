@@ -5,12 +5,14 @@ class ContentSection extends StatelessWidget {
   final String title;
   final double itemHeight;
   final Widget Function(BuildContext, int) itemBuilder;
+  final int itemCount; 
 
   const ContentSection({
     super.key,
     required this.title,
     required this.itemHeight,
     required this.itemBuilder,
+    required this.itemCount, 
   });
 
   @override
@@ -23,12 +25,13 @@ class ContentSection extends StatelessWidget {
           title,
           style: MyTextStyles.headingStyle,
         ),
+        const SizedBox(height: 10,),
         SizedBox(
           height: itemHeight,
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            itemCount: 12,
+            itemCount: itemCount, 
             itemBuilder: itemBuilder,
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hotstar/api/api.dart';
-import 'package:hotstar/models/movies.dart';
+import 'package:hotstar/api/apicopy.dart';
+import 'package:hotstar/models/moviecp.dart';
 import 'package:hotstar/screens/home/homebody.dart';
 import 'package:hotstar/screens/home/widgets/button.dart';
 import 'package:hotstar/screens/home/widgets/homecarousel.dart';
@@ -9,18 +9,16 @@ import 'package:hotstar/utils/icons.dart';
 import 'package:hotstar/utils/styles.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<Movie>> popularMovies = fetchpopularMovies();
-  late Future<List<Movie>> upcomingMovies = fetchupcomingMovies();
-  late Future<List<Movie>> topratedMovies = fetchtopratedMovies();
-  late Future<List<Movie>> toptvratedmovies = fetchtoptvratedmovies();
-  late Future<List<Movie>> nowPlayingMovies = fetchNowPlayingMovies();
+  late Future<List<MovieCopy>> popularCopyMovie;
   @override
   void initState() {
     super.initState();
@@ -28,31 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> loadMovies() async {
-    popularMovies = Api().getPopularMovies();
-    upcomingMovies = Api().getUpcomingMovies();
-    topratedMovies = Api().getTopRatedMovies();
-    toptvratedmovies = Api().gettopTvRatedMovies();
-    nowPlayingMovies = Api().getnowPLaying();
-  }
-
-  static Future<List<Movie>> fetchNowPlayingMovies() async {
-    return Api().getnowPLaying();
-  }
-
-  static Future<List<Movie>> fetchupcomingMovies() async {
-    return Api().getUpcomingMovies();
-  }
-
-  static Future<List<Movie>> fetchtopratedMovies() async {
-    return Api().getTopRatedMovies();
-  }
-
-  static Future<List<Movie>> fetchtoptvratedmovies() async {
-    return Api().gettopTvRatedMovies();
-  }
-
-  static Future<List<Movie>> fetchpopularMovies() async {
-    return Api().getPopularMovies();
+    popularCopyMovie = ApiCopy().getPopularMovies();
   }
 
   @override
@@ -65,26 +39,31 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             children: [
               Expanded(
-                child: FutureBuilder<List<Movie>>(
-                  future: topratedMovies,
+                child: FutureBuilder<List<MovieCopy>>(
+                  future: popularCopyMovie,
                   builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return HomeScreenBody(movies: snapshot.data!);
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text(snapshot.error.toString()),
+                      );
+                    } else if (snapshot.hasData) {
+                      // final data = snapshot.data;
+                      return HomeScreenBody(snapshot: snapshot);
                     } else {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
                     }
                   },
                 ),
               ),
-              // ButtonClass(
-              //   buttonColor: addgrey,
-              //   buttonText: "Watch ",
-              //   buttonText2: " Free",
-              //   additionalColor: addColor,
-              //   textColor: white,
-              // ),
+              ButtonClass(
+                buttonColor: addgrey, //addgrey,
+                buttonText: "Watch ",
+                buttonText2: " Free",
+                additionalColor: addColor,
+                textColor: white,
+              ),
               const Expanded(child: HomeContentScreen()),
             ],
           ),
@@ -94,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
             right: 0,
             child: AppBar(
               elevation: 0,
-              backgroundColor: Colors.transparent,
+              backgroundColor: transparent,
               leading: Image.asset(pIconBg),
               actions: [
                 Row(
@@ -124,20 +103,38 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          Text('p'),
-          Positioned(
-            top: 391,
-            left: 130,
-            child: ButtonClass(
-              buttonColor: Colors.transparent.withOpacity(0.5), //addgrey,
-              buttonText: "Watch ",
-              buttonText2: " Free",
-              additionalColor: addColor,
-              textColor: white,
-            ),
-          )
         ],
       ),
     );
   }
 }
+
+
+
+  // late Future<List<Movie>>? popularMovies = fetchpopularMovies();
+  // late Future<List<Movie>>? upcomingMovies = fetchupcomingMovies();
+  // late Future<List<Movie>>? topratedMovies = fetchtopratedMovies();
+  // late Future<List<Movie>>? toptvratedmovies = fetchtoptvratedmovies();
+  // late Future<List<Movie>>? nowPlayingMovies = fetchNowPlayingMovies();
+
+      // popularMovies = Api().getPopularMovies();
+    // upcomingMovies = Api().getUpcomingMovies();
+    // topratedMovies = Api().getTopRatedMovies();
+    // toptvratedmovies = Api().gettopTvRatedMovies();
+    // nowPlayingMovies = Api().getnowPLaying();
+
+     // static Future<List<Movie>> fetchNowPlayingMovies() async {
+  //   return Api().getnowPLaying();
+  // }
+
+  // static Future<List<Movie>> fetchupcomingMovies() async {
+  //   return Api().getUpcomingMovies();
+  // }
+
+  // static Future<List<Movie>> fetchtopratedMovies() async {
+  //   return Api().getTopRatedMovies();
+  // }
+
+  // static Future<List<Movie>> fetchtoptvratedmovies() async {
+  //   return Api().gettopTvRatedMovies();
+  // }

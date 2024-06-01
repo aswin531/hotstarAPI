@@ -7,33 +7,30 @@ class NewandHotScreen extends StatefulWidget {
   State<NewandHotScreen> createState() => _NewandHotScreenState();
 }
 
-class _NewandHotScreenState extends State<NewandHotScreen>
-    with SingleTickerProviderStateMixin {
-  TabController? _tabController;
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
+class _NewandHotScreenState extends State<NewandHotScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      // body: Column(
-      //   children: [
-      //     TabBar(tabs: [
-      //       Tab(
-      //         text: 'Coming Soon',
-      //       ),
-      //       Tab(
-      //         text: 'Free - Newly Added',
-      //       )
-      //     ]),
-      //     TabBarView(
-      //       children: [],
-      //     )
-      //   ],
-      // ),
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/newhot.jpeg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          // child: Center(
+          //   // You can add other widgets on top of the background image
+          //   child: Text(
+          //     'Your Content Here',
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 24,
+          //     ),
+          //   ),
+          // ),
+        ),
+      ),
     );
   }
 }

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:hotstar/screens/search/widgets/explore.dart';
 import 'package:hotstar/screens/search/widgets/searchbar.dart';
 import 'package:hotstar/screens/search/widgets/searchbody.dart';
 import 'package:hotstar/utils/colors.dart';
@@ -27,7 +25,6 @@ class SearchScreen extends StatelessWidget {
                 height: 20,
               ),
               SearchScreenBody(),
-              // SearchStaggeredScreen()
             ],
           ),
         ),

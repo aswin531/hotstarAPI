@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hotstar/screens/search/widgets/explore.dart';
 import 'package:hotstar/utils/colors.dart';
 import 'package:hotstar/utils/styles.dart';
 
@@ -16,7 +17,7 @@ class _SearchScreenBodyState extends State<SearchScreenBody> {
   List<String> categories = [
     "India",
     "Movies",
-    "Shoes",
+    "Shows",
     "Action",
     "Comedy",
     "Crime",
@@ -95,6 +96,7 @@ class _SearchScreenBodyState extends State<SearchScreenBody> {
                   );
                 }),
           ),
+          // SearchStaggeredScreen()
         ],
       ),
     );

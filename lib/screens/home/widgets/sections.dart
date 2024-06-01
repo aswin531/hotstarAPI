@@ -1,9 +1,9 @@
-import 'package:hotstar/models/movies.dart';
+import 'package:hotstar/models/moviecp.dart';
 
 class Section {
   final String title;
   final String apiUrl;
-  final Future<List<Movie>> Function() fetchData;
+  final Future<List<MovieCopy>> Function() fetchData;
 
   const Section({
     required this.title,

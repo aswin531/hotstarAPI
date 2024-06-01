@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hotstar/models/movies.dart';
+import 'package:hotstar/models/moviecp.dart';
 import 'package:hotstar/screens/details/button.dart';
 import 'package:hotstar/screens/details/widgets/richtext.dart';
 import 'package:hotstar/screens/details/widgets/texticon.dart';
@@ -10,9 +10,10 @@ import 'package:hotstar/utils/colors.dart';
 import 'package:hotstar/utils/styles.dart';
 
 class DetailedMovieScreen extends StatefulWidget {
-  final Movie movie;
-
-  const DetailedMovieScreen({super.key, required this.movie});
+  final MovieCopy movieCopy;
+  final String imageurl;
+  const DetailedMovieScreen(
+      {super.key, required this.movieCopy, required this.imageurl});
 
   @override
   State<DetailedMovieScreen> createState() => _DetailedMovieScreenState();
@@ -35,12 +36,14 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
                     width: double.infinity,
                     color: primary,
                     child: CachedNetworkImage(
-                      imageUrl: widget.movie.backdropPath ?? "",
+                      imageUrl: widget.imageurl,
+                      // fit: BoxFit.cover,
+                      filterQuality: FilterQuality.high,
                     ),
                   );
                 },
                 options: CarouselOptions(
-                  aspectRatio: 16 / 10,
+                  aspectRatio: 16 / 14,
                   autoPlay: false,
                   viewportFraction: 1,
                   autoPlayAnimationDuration: const Duration(seconds: 3),
@@ -64,7 +67,21 @@ class _DetailedMovieScreenState extends State<DetailedMovieScreen> {
             ],
           ),
           const SizedBox(
-            height: 110,
+            height: 10, // Adjust the spacing as needed
+          ),
+          Text(
+            widget.movieCopy.title ?? "",
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20, // Adjust the font size as needed
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          const SizedBox(
+            height: 50,
           ),
           const DetailedButton(),
           Container(

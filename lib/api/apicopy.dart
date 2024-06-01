@@ -2,22 +2,23 @@
 import 'dart:convert';
 import 'package:hotstar/api/apiconstants.dart';
 import 'package:hotstar/api/exceptions.dart';
-import 'package:hotstar/models/movies.dart';
+import 'package:hotstar/models/moviecp.dart';
 import 'package:http/http.dart' as http;
 
-class Api {
+class ApiCopy {
   final String _baseUrl = "https://api.themoviedb.org/3/";
 
-  Future<List<Movie>> _fetchMovies(String endpoint) async {
+  Future<List<MovieCopy>> _fetchCopyMovies(String endpoint) async {
     const String apiKey = ApiDetails.apiKey;
     final url = Uri.parse("$_baseUrl$endpoint?api_key=$apiKey");
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        final List<dynamic> data = json.decode(response.body)['results'];
-        List<Movie> movies =
-            data.map((movie) => Movie.fromMap(movie, 'latest')).toList();
-        return movies;
+        final decodeData = json.decode(response.body)["results"] as List;
+        print(decodeData);
+        return decodeData
+            .map((moviecopy) => MovieCopy.fromJson(moviecopy))
+            .toList();
       } else {
         String errorMessage = '';
         if (response.body.isNotEmpty) {
@@ -51,24 +52,24 @@ class Api {
     }
   }
 
-  Future<List<Movie>> getPopularMovies() async {
-    return _fetchMovies("tv/popular");
+  Future<List<MovieCopy>> getPopularMovies() async {
+    return _fetchCopyMovies("tv/popular");
   }
 
-  Future<List<Movie>> getUpcomingMovies() async {
-    return _fetchMovies("tv/on_the_air");
+  Future<List<MovieCopy>> getUpcomingMovies() async {
+    return _fetchCopyMovies("tv/on_the_air");
   }
 
-  Future<List<Movie>> getTopRatedMovies() async {
-    return _fetchMovies("movie/top_rated");
+  Future<List<MovieCopy>> getTopRatedMovies() async {
+    return _fetchCopyMovies("movie/top_rated");
   }
 
-  Future<List<Movie>> getTopRatedTvShows() async {
-    return _fetchMovies("tv/top_rated");
+  Future<List<MovieCopy>> getTopRatedTvShows() async {
+    return _fetchCopyMovies("tv/top_rated");
   }
 
-  Future<List<Movie>> getnowPLaying() {
-    return _fetchMovies("movie/now_playing");
+  Future<List<MovieCopy>> getnowPLaying() {
+    return _fetchCopyMovies("movie/now_playing");
   }
 
   gettopTvRatedMovies() {}

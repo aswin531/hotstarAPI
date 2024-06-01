@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hotstar/utils/colors.dart';
 
 class ExploreItem {
@@ -13,7 +12,7 @@ class ExploreItem {
 }
 
 class SearchStaggeredScreen extends StatefulWidget {
-  const SearchStaggeredScreen({Key? key}) : super(key: key);
+  const SearchStaggeredScreen({super.key});
 
   @override
   State<SearchStaggeredScreen> createState() => _SearchStaggeredScreenState();
@@ -46,7 +45,7 @@ class _SearchStaggeredScreenState extends State<SearchStaggeredScreen> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         mainAxisSpacing: 4,
         crossAxisSpacing: 4,
@@ -61,16 +60,16 @@ class _SearchStaggeredScreenState extends State<SearchStaggeredScreen> {
 class Tile extends StatelessWidget {
   final int index;
 
-  const Tile({Key? key, required this.index}) : super(key: key);
+  const Tile({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue, // Change color as needed
+      color: Colors.blue, 
       child: Center(
         child: Text(
           'Tile $index',
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
       ),
     );
