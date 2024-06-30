@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+ // ignore_for_file: avoid_print
 import 'dart:convert';
 import 'package:hotstar/api/apiconstants.dart';
 import 'package:hotstar/api/exceptions.dart';
@@ -15,7 +15,7 @@ class ApiCopy {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final decodeData = json.decode(response.body)["results"] as List;
-        print(decodeData);
+        //print(decodeData);
         return decodeData
             .map((moviecopy) => MovieCopy.fromJson(moviecopy))
             .toList();

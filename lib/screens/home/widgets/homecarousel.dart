@@ -6,7 +6,7 @@ import 'package:hotstar/screens/details/detailedscreen.dart';
 import 'package:hotstar/utils/colors.dart';
 
 class HomeScreenBody extends StatelessWidget {
-  HomeScreenBody({Key? key, required this.snapshot});
+  const HomeScreenBody({super.key, required this.snapshot});
 
   final AsyncSnapshot snapshot;
 
@@ -63,7 +63,7 @@ class HomeScreenBody extends StatelessWidget {
               child: Center(
                 child: Text(
                   movieCopy.title ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
